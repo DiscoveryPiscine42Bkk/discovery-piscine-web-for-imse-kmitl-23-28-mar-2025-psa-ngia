@@ -5,16 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div>
-      <button onclick="changeBg()">Click me!</button>
+      <button id="change">Click me!</button>
     </div>
   </body>
   <script>
-    const changeBg = () => {
-      let newColor = "#" + Math.floor(Math.random() * 17651837).toString(16);
-      document.body.style.backgroundColor = newColor;
-    };
+    $("#change").on("click", () => {
+      let newColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+      let p = $("body").css("background-color", newColor);
+    });
   </script>
 </html>
