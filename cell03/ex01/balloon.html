@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <style>
     .container {
@@ -22,46 +27,49 @@
   <body>
     <div class="container">
       <div
-        onclick="addSize()"
-        onmouseleave="removeSize()"
         id="ballon"
         style="width: 200px; height: 200px; background-color: red"
       ></div>
     </div>
   </body>
   <script>
-    const removeSize = () => {
-      const ballon = document.getElementById("ballon");
-      const colors = ["blue", "green", "red"];
-      let width = parseInt(ballon.style.width) - 5;
-      let height = parseInt(ballon.style.height) - 5;
-      if (width < 200) {
-        ballon.style.width = 200 + "px";
-        ballon.style.height = 200 + "px";
+    $("#ballon").click(() => {
+      const colors = ["rgb(255, 0, 0)", "rgb(0, 255, 0)", "rgb(0, 0, 255)"];
+      const ballon = $("#ballon");
+      let width = ballon.width() + 10;
+      let height = ballon.height() + 10;
+      if (width > 420) {
+        ballon.css("width", "200px");
+        ballon.css("height", "200px");
+        ballon.css("background-color", "red");
       } else {
-        ballon.style.width = width + "px";
-        ballon.style.height = height + "px";
+        ballon.css("width", width);
+        ballon.css("height", height);
+        const color = ballon.css("background-color");
+        ballon.css(
+          "background-color",
+          colors[(colors.findIndex((e) => e == color) + 1) % 3]
+        );
       }
-      const color = ballon.style.backgroundColor;
-      ballon.style.backgroundColor =
-        colors[(colors.findIndex((e) => e == color) + 1) % 3];
-    };
-    const addSize = () => {
-      const ballon = document.getElementById("ballon");
-      const colors = ["red", "green", "blue"];
-      let width = parseInt(ballon.style.width) + 10;
-      let height = parseInt(ballon.style.height) + 10;
+    });
+    $("#ballon").mouseleave(() => {
+      const colors = ["rgb(0, 0, 255)", "rgb(0, 255, 0)", "rgb(255, 0, 0)"];
+      const ballon = $("#ballon");
+
+      let width = ballon.width() - 5;
+      let height = ballon.height() - 5;
       if (width < 200) {
-        ballon.style.width = 200 + "px";
-        ballon.style.height = 200 + "px";
-        ballon.style.backgroundColor = "red";
+        ballon.css("width", "200px");
+        ballon.css("height", "200px");
       } else {
-        ballon.style.width = width + "px";
-        ballon.style.height = height + "px";
-        const color = ballon.style.backgroundColor;
-        ballon.style.backgroundColor =
-          colors[(colors.findIndex((e) => e == color) + 1) % 3];
+        ballon.css("width", width);
+        ballon.css("height", height);
       }
-    };
+      const color = ballon.css("background-color");
+      ballon.css(
+        "background-color",
+        colors[(colors.findIndex((e) => e == color) + 1) % 3]
+      );
+    });
   </script>
 </html>
